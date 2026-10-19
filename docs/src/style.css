@@ -1,0 +1,233 @@
+/* Design Tokens & Theme Palettes */
+:root {
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --transition-speed: 0.3s;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --surface-color: #1E1E1E;
+    --appbar-bg: #1F1F1F;
+    --text-primary: #FFFFFF;
+    --text-secondary: #AAAAAA;
+    --accent-color: #2E7D32; /* Derived from your ic_done stroke asset */
+    --accent-text: #FFFFFF;
+    --border-color: #333333;
+}
+
+[data-theme="light"] {
+    --bg-color: #FFFFFF;
+    --surface-color: #FFFFFF;
+    --appbar-bg: #FFFFF0; /* Matches your colorPrimary color token */
+    --text-primary: #000000;
+    --text-secondary: #757575;
+    --accent-color: #2E7D32;
+    --accent-text: #FFFFFF;
+    --border-color: #E0E0E0;
+}
+
+/* Global Dynamic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Material App Bar */
+.app-bar {
+    background-color: var(--appbar-bg);
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.left-section, .right-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.app-bar h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background var(--transition-speed);
+}
+
+.icon-btn:hover, .icon-btn:focus {
+    background-color: rgba(128, 128, 128, 0.2);
+    outline: none;
+}
+
+.icon-btn svg {
+    width: 24dp;
+    height: 24dp;
+    fill: var(--text-primary);
+}
+
+.lang-dropdown {
+    background: var(--surface-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Content Frame Layout */
+.main-content {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 16px;
+    position: relative;
+}
+
+.filter-heading {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 16px 0 24px 8px;
+}
+
+/* Task Row Implementation */
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-item {
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Hardcoded Checkbox Custom CSS */
+.custom-checkbox {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 2px;
+    margin-right: 16px;
+    transition: background var(--transition-speed), border-color var(--transition-speed);
+}
+
+.checkbox-container input:checked ~ .custom-checkbox {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .custom-checkbox::after {
+    display: block;
+}
+
+/* Striking completed items dynamic style */
+.task-text {
+    transition: color var(--transition-speed), text-decoration var(--transition-speed);
+}
+
+.checkbox-container input:checked ~ .task-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+/* Material Floating Action Button (FAB) */
+.fab {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background-color: var(--accent-color);
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color var(--transition-speed);
+}
+
+.fab:hover, .fab:focus {
+    transform: scale(1.05);
+    outline: none;
+}
+
+.fab svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--accent-text);
+}
+
+/* Responsive Structural Breakpoints */
+@media (min-width: 820px) {
+    .main-content {
+        padding: 32px 64px; /* Adaptive expansion based on your dimens wide mapping */
+    }
+    .fab {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+    }
+}
