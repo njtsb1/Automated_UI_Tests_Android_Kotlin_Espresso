@@ -1,0 +1,7 @@
+# Local IDE setups and logs
+.vscode/
+.idea/
+*.log
+
+# Dependency lock files tracking hardware caches
+.DS_Store
