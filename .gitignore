@@ -1,0 +1,28 @@
+# Android Studio and IntelliJ
+.idea/
+*.iml
+.gradle/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+cmake/
+
+# Build outputs
+build/
+app/build/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Device/Emulator backups
+*.apk
+*.ap_
+*.dex
+
+# Kotlin Scratches
+*.kts
